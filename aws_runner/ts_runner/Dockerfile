@@ -29,9 +29,9 @@ ENV PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig"
 ENV LD_LIBRARY_PATH="/usr/local/lib:/usr/local/lib64"
 
 # compile python 11 from sources. Python 11 requires by py-near
-RUN wget https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz && \
-    tar zxvf Python-3.11.9.tgz && \
-    cd Python-3.11.9/ && \
+RUN wget https://www.python.org/ftp/python/3.11.17/Python-3.11.17.tgz && \
+    tar zxvf Python-3.11.17.tgz && \
+    cd Python-3.11.17/ && \
     ./configure \
         --enable-optimizations \
         --with-openssl=/usr \
@@ -39,10 +39,10 @@ RUN wget https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz && \
         --with-ensurepip=install \
         LDFLAGS="${LDFLAGS}" \
         CPPFLAGS="${CPPFLAGS}" && \
-    make -j$(nproc) && \
+    make -j2 && \
     make altinstall && \
     cd .. && \
-    rm -rf Python-3.11.9*
+    rm -rf Python-3.11.17*
 
 
 # Install pip and create symlinks
@@ -51,7 +51,7 @@ RUN ln -sf /usr/local/bin/python3.11 /usr/bin/python && \
 
 RUN python -c "import ssl; print('SSL Module:', ssl.OPENSSL_VERSION)"
 
-RUN python -m pip install --upgrade pip --trusted-host pypi.org --trusted-host files.pythonhosted.org
+RUN python -m pip install --upgrade pip
 
 # make sure we have python and pip
 RUN python --version && pip --version
