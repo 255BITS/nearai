@@ -51,10 +51,10 @@ jobs:
       run: uv lock --check
 
     - name: Install dependencies base
-      run: uv sync
+      run: uv sync --locked
 
     - name: Install dependencies extras
-      run: uv pip install ".[hub,dev,docs]"
+      run: uv sync --locked --extra hub --extra dev --extra docs
 
     - name: Lint Check
       run: ./scripts/lint_check.sh
