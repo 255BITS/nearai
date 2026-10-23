@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - hub/demo/**
+      - .github/workflows/frontend-ci.yml
   push:
     branches:
       - main
@@ -10,6 +11,7 @@ on:
       - develop
     paths:
       - hub/demo/**
+      - .github/workflows/frontend-ci.yml
 
 jobs:
   format-and-lint:
@@ -24,11 +26,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "24.22.1"
           cache: "npm"
           cache-dependency-path: "./hub/demo/package-lock.json"
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Format
         run: npm run format
       - name: Lint
@@ -46,10 +48,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "24.22.1"
           cache: "npm"
           cache-dependency-path: "./hub/demo/package-lock.json"
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Check types
         run: npm run ts:check
