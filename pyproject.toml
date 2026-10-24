@@ -19,7 +19,8 @@ dependencies = [
     "fastapi>=0.111.0,<0.112.0",
     "fire>=0.6.0,<0.7.0",
     "jinja2>=3.1.4,<4.0.0",
-    "litellm>=1.60.5,<2.0.0",
+    # Keep fresh installs on the hash-locked release reviewed before the 2026 compromise.
+    "litellm==1.61.20",
     "mypy-boto3>=1.34.147,<2.0.0",
     "mypy-boto3-s3>=1.34.138,<2.0.0",
     "openai>=1.66.2,<2.0.0",
